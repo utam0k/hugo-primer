@@ -1,3 +1,5 @@
+{{ $root := . }}
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -31,22 +33,23 @@
     {{ end }}
     <!-- Twitter Card -->
     {{ if .Site.Params.UseTwitterCard }}
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@{{ .Site.Params.Twitter }}">
-    <meta name="twitter:creator" content="@{{ .Site.Params.Twitter }}">
-    {{- with .Title | default .Site.Title }}
-      <meta name="twitter:title" content="{{ . | truncate 70 }}" />
-    {{- end }}
-    {{- with .Description | default .Params.subtitle | default .Summary }}
-      <meta name="twitter:description" content="{{ . | truncate 200 }}">
-    {{- end }}
-    {{- if .Params.local_share_img }}
-      <meta name="twitter:image" content="{{ $root.Permalink | absURL }}{{ .Params.local_share_img }}" />
-    {{- else }}
-      {{ with .Params.image | default .Site.Params.logo }}
-      <meta name="twitter:image" content="{{ . | absURL }}" />
-      {{ end }}
-    {- end }
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:site" content="@{{ .Site.Params.Twitter }}">
+      <meta name="twitter:creator" content="@{{ .Site.Params.Twitter }}">
+      {{- with .Title | default .Site.Title }}
+        <meta name="twitter:title" content="{{ . | truncate 70 }}" />
+      {{- end }}
+      {{- with .Description | default .Params.subtitle | default .Summary }}
+        <meta name="twitter:description" content="{{ . | truncate 200 }}">
+      {{- end }}
+      {{- if .Params.local_share_img }}
+        <meta name="twitter:image" content="{{ $root.Permalink | absURL }}{{ .Params.local_share_img }}" />
+      {{- else }}
+        {{ with .Params.image | default .Site.Params.logo }}
+        <meta name="twitter:image" content="{{ . | absURL }}" />
+        {{ end }}
+      {{- end }}
+    {{ end }}
 
 
     <!-- OGP -->
@@ -68,7 +71,7 @@
       {{ with .Params.image | default .Site.Params.logo }}
       <meta name="og:image" content="{{ . | absURL }}" />
       {{ end }}
-    {- end }
+    {{- end }}
 
     <!-- stylesheet -->
     <link rel="stylesheet" href="{{ `assets/syntax.css` | relURL }}">
