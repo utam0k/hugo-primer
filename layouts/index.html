@@ -6,21 +6,8 @@
 {{ define "main" }}
 <!-- list template -->
 <div>
-
-  <h1>{{ .Title }}</h1>
-  {{ .Content }}
-
   {{ range .Paginator.Pages }}
-  <div>
-    <div>
-      <a href="{{ .RelPermalink }}">
-        <h3>{{ .Title }}</h3>
-      </a>
-      <small>{{ .Permalink }}</small>
-      {{ .Date.Format "2006-01-02" }}
-    </div>
-    {{ .Summary }}
-  </div>
+    {{ partial "card.page.html" . }}
   {{ end }}
 
   {{ if gt .Paginator.TotalPages 1 }}
