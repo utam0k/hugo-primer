@@ -1,6 +1,9 @@
-<nav class="UnderlineNav UnderlineNav--right px-2">
-  <a class="UnderlineNav-actions muted-link h2" href="{{ .Site.BaseURL }}">
-    {{ .Site.Title }}
+<nav class="UnderlineNav UnderlineNav-right px-3">
+  <a class="d-inline-flex UnderlineNav-actions muted-link h2" href="{{ .Site.BaseURL }}">
+      {{- if .Site.Params.logo }}
+        <img class="avatar avatar-5 mr-2" src="{{ .Site.Params.logo | absURL }}" />
+      {{- end }}
+      <div class="hide-sm"> <span> {{ .Site.Title }}</span> </div>
   </a>
 
   {{ $currentPage := . }}
