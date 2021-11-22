@@ -31,7 +31,7 @@
     {{ end }}
     <!-- Twitter Card -->
     {{ if .Site.Params.UseTwitterCard }}
-    <meta name="twitter:card" content="summary">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@{{ .Site.Params.Twitter }}">
     <meta name="twitter:creator" content="@{{ .Site.Params.Twitter }}">
     {{- with .Title | default .Site.Title }}
