@@ -34,9 +34,15 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@{{ .Site.Params.Twitter }}">
     <meta name="twitter:creator" content="@{{ .Site.Params.Twitter }}">
-    <meta name="twitter:title" content="{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Title }}">
-    <meta name="twitter:description" content="{{ .Description | default .Summary }}|{{ .Site.Params.Description }}">
-    <meta name="twitter:image" content="{{ .Site.BaseURL }}twitter-card.png">
+    {{- with .Title | default .Site.Title }}
+      <meta name="twitter:title" content="{{ . | truncate 70 }}" />
+    {{- end }}
+    {{- with .Description | default .Params.subtitle | default .Summary }}
+      <meta name="twitter:description" content="{{ . | truncate 200 }}">
+    {{- end }}
+    {{- with .Params.share_img | default .Params.image | default .Site.Params.logo }}
+      <meta name="twitter:image" content="{{ . | absURL }}" />
+    {{- end}}
     {{ end }}
 
 
