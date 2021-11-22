@@ -13,9 +13,11 @@
       </div>
     </div>
   </div>
-  <div class="text-gray">
-    <!-- summary -->
-    {{ .Summary }}
-    <a class="muted-link" href="{{ .RelPermalink }}">…</a>
-  </div>
+  {{ $length := len .Summary }} {{ if ne $length 0 }}
+    <div class="text-gray">
+      <!-- summary -->
+      {{ .Summary }}
+      <a class="muted-link" href="{{ .RelPermalink }}">…</a>
+    </div>
+  {{ end}}
 </div>
