@@ -40,10 +40,14 @@
     {{- with .Description | default .Params.subtitle | default .Summary }}
       <meta name="twitter:description" content="{{ . | truncate 200 }}">
     {{- end }}
-    {{- with .Params.share_img | default .Params.image | default .Site.Params.logo }}
+    {{- if .Params.local_share_img }}
+      <meta name="twitter:image" content="{{ $root.Permalink | absURL }}{{ .Params.local_share_img }}" />
+    {{- else }}
+      {{ with .Params.image | default .Site.Params.logo }}
       <meta name="twitter:image" content="{{ . | absURL }}" />
-    {{- end}}
-    {{ end }}
+      {{ end }}
+    {- end }
+
 
     <!-- OGP -->
     {{- with .Title | default .Site.Title }}
@@ -52,15 +56,19 @@
     {{- with .Description | default .Params.subtitle | default .Summary }}
     <meta property="og:description" content="{{ . }}">
     {{- end }}
-    {{- with .Params.share_img | default .Params.image | default .Site.Params.logo }}
-    <meta property="og:image" content="{{ . | absURL }}" />
-    {{- end }}
     {{- with .Site.Params.fb_app_id }}
     <meta property="fb:app_id" content="{{ . }}" />
     {{- end }}
     <meta property="og:url" content="{{ .Permalink | absLangURL }}" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="{{ .Site.Title }}" />
+    {{- if .Params.local_share_img }}
+      <meta name="og:image" content="{{ $root.Permalink | absURL }}{{ .Params.local_share_img }}" />
+    {{- else }}
+      {{ with .Params.image | default .Site.Params.logo }}
+      <meta name="og:image" content="{{ . | absURL }}" />
+      {{ end }}
+    {- end }
 
     <!-- stylesheet -->
     <link rel="stylesheet" href="{{ `assets/syntax.css` | relURL }}">
